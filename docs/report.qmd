@@ -1,0 +1,98 @@
+---
+title: "Linear Regression Quality Assurance"
+author: "Joe Perry"
+execute:
+  echo: false
+format:
+  html:
+    self-contained: true
+    embed-resources: true
+    toc: true
+    toc-title: "Contents"
+    toc-location: left
+    html-math-method: katex
+---
+
+```{python}
+#| tags: [parameters]
+
+model = None
+theta_0 = None
+theta_1 = None
+pipeline_runtime = None
+x_data = None
+y_data = None
+y_predicted = None
+residuals = None
+w_stat = None
+p_value = None
+config = None
+r_squared = None
+
+```
+
+## Introduction
+
+This QA report is for a univariate linear regression pipeline run on the [____ dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle, and seeks to model the relationship between ____ and ____. The report was created using Quarto, RStudio's multi-language version of R Markdown.
+
+## Pipeline Configuration
+
+Below is the pipeline configuration used in generating this report. The convergence threshold determines when the model is considered to have finished training, and theta_0 and theta_1 are the regression model parameters, namely the y-intercept and gradient, respectively.
+
+```{python}
+
+from IPython.display import display, Markdown
+from tabulate import tabulate
+import pandas as pd
+import numpy as np
+from plotting import residuals_plot, qq_plot, scatter_plot
+
+# Tabulating the config data
+# tabulate() doesn't accept dictionaries as arguments so we are converting
+# the dict to a list of lists, ignoring the file_path setting
+headers = ["Config Setting", "Value"]
+print(tabulate([[key, val] for key, val in config.items() if key != "file_path"], headers = headers))
+```
+
+## Model Performance
+
+```{python}
+
+display(Markdown(f"""The pipeline took {pipeline_runtime:.3}s to run. Below we see the best fit line of the model plotted alongside the data. The model has a coefficient of determination (R^2) of {r_squared:.5}, and the predicted intercept and gradient values are {theta_0:.3} and {theta_1:.3} respectively."""))
+```
+
+
+```{python}
+
+scatter_plot(theta_0, theta_1, np.asarray(x_data), np.asarray(y_data))
+```
+
+One of the assumptions of linear regression is that the errors are normally distributed. 
+We may visually check this by plotting the errors/residuals against the model's predicted 
+y-values. We want the residuals to be randomly distributed about zero, regardless of the 
+size of the fitted/predicted values.
+
+```{python}
+
+residuals_plot(np.asarray(y_predicted), np.asarray(residuals))
+```
+
+A QQ plot also allows us to assess whether the residuals are likely to have come from a normal 
+distribution.
+
+```{python}
+#| include: False
+
+qq_plot_fig = qq_plot(np.asarray(residuals))
+```
+
+```{python}
+
+qq_plot_fig.show()
+```
+
+
+```{python}
+
+display(Markdown(f"""Finally we also perform a Shapiro-Wilk test, and find a Wilk-statistic of {w_stat:.3} and a p-value of {p_value:.3} for the residuals. """))
+```
