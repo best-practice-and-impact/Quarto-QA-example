@@ -40,6 +40,13 @@ linreg.fit_model(x_data, y_data)
 
 y_predicted = linreg.calculate_predicted_values(x_data)
 
+
+# Quarto runs its own Python environment, so below we are passing any data and
+# model parameters that we want to put in the report using the execture_params argument
+# Alternatively we could save the data in a temporary location instead and load
+# it in Quarto.
+# We could also Pickle our model and load it into Quarto that way
+
 # NumPy dtypes (arrays, numpy floats) are converted back to native types as numpy
 # doesn't play well with yaml.dump() (used in quarto.render's logic)
 render(
