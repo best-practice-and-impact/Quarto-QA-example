@@ -19,6 +19,14 @@ using `pip install -r requirements.txt`
 
 ## Usage
 
+After cloning the repo and downloading all the dependencies, the pipeline should run unmodified. You may alter parameters from within the config file, where you have control over the model's initial values for the intercept and gradient, labelled $\theta_0$ and $\theta_1$ according to $y=\theta_0 + \theta_1 x$.
+
+The convergence threshold determines when the model will stop training. At every iteration of the training loop the value of the loss function is subtracted from its previous value, and training stops when this difference reaches the convergence threshold.
+
+The learning rate determines the size of the steps taken by the model when updating $\theta_0$ and $\theta_1$. Higher values will train faster but may reach a less precise final model.
+
+Finally the config file allows you to select which data to run the model on. If you wish to add your own dataset, you will have to put a csv file into the data folder, and alter the code to select the specific rows/columns of the dataframe that you want to model. After running the pipeline, a file called report.html will be produced in the docs folder, which is the QA report produced by Quarto.
+
 ## Useful links
 
 1. [The Duck Book](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html)
