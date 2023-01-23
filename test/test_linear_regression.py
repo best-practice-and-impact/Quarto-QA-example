@@ -1,4 +1,4 @@
-from linear_regression import LinRegression
+from src.linear_regression import LinRegression
 import pytest
 import numpy as np
 
