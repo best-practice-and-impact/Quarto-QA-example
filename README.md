@@ -18,20 +18,22 @@ At data ingest there are some basic input validation checks performed both on th
 1. Install the Quarto command-line interface (CLI) from the [Quarto website](https://quarto.org/docs/get-started/) or using `pip install quarto` from the command line.
 If using Visual Studio, you should additionally install the Quarto VSCode extension.
 
-2. After cloning the repository to your machine, navigate to the project directory within your command/Powershell prompt and install/update all package dependencies 
+2. After cloning the repository to your machine, navigate to the project directory within the terminal and install/update all package dependencies 
 using `pip install -r requirements.txt`
 
 ## Usage
 
-After cloning the repo and downloading all the dependencies, the pipeline should run unmodified. You may alter parameters from within the config file, where you have control over the model's initial values for the intercept and gradient, labelled $\theta_0$ and $\theta_1$ according to $y=\theta_0 + \theta_1 x$.
+After cloning the repo and downloading all the dependencies, the pipeline should run unmodified by executing the main script. If desired, you may alter parameters from within the config file, where you have control over the model's initial values for the intercept and gradient, labelled $\theta_0$ and $\theta_1$ according to $y=\theta_0 + \theta_1 x$.
 
 The convergence threshold determines when the model will stop training. At every iteration of the training loop the value of the loss function is subtracted from its previous value, and training stops when this difference reaches the convergence threshold.
 
 The learning rate determines the size of the steps taken by the model when updating $\theta_0$ and $\theta_1$. Higher values will train faster but may reach a less precise final model.
 
-Finally the config file allows you to select which data to run the model on. If you wish to add your own dataset, you will have to put a csv file into the data folder, and alter the code to select the specific rows/columns of the dataframe that you want to model. After running the pipeline, a file called report.html will be produced in the docs folder, which is the QA report produced by Quarto.
+Finally the config file allows you to select which data to run the model on. If you wish to add your own dataset, you will have to put a csv file into the data folder, and alter the code to select the specific rows/columns of the dataframe that you want to model.
 
-Unit tests may be run by navigating to the project directory in a CMD/Powershell prompt and executing the command `pytest`.
+Quarto currently has no easy way to specify output directories, and as a result you will find the output file (called report.html) in the src folder.
+
+Unit tests may be run by navigating to the project's test directory in the terminal and executing the command `pytest`.
 
 ## Useful links
 
