@@ -5,7 +5,6 @@ execute:
   echo: false
 format:
   html:
-    self-contained: true
     embed-resources: true
     toc: true
     toc-title: "Contents"

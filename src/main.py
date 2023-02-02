@@ -1,15 +1,17 @@
-import yaml
-import seaborn as sns
-import pandas as pd
+import datetime
+
 import matplotlib.pyplot as plt
-from sklearn.datasets import make_regression
+import pandas as pd
+import seaborn as sns
+import yaml
 from linear_regression import LinRegression
 from quarto import render
+from sklearn.datasets import make_regression
 
-with open('config.yaml') as f:
+with open('../config.yaml') as f:
     config = yaml.load(f, Loader = yaml.FullLoader)
 
-# out_filename = str(datetime.today().date()) + "regression_QA"
+out_filename = str(datetime.today().date()) + "regression_QA"
 
 df = pd.read_csv(config["file_path"])
 sns.pairplot(df)
@@ -52,7 +54,7 @@ y_predicted = linreg.calculate_predicted_values(x_data)
 render(
     input = "report.qmd", 
     output_format = "html",
-    # output_file = out_filename, 
+    output_file = out_filename, 
     execute_params = {
         "theta_0" : linreg.theta_0, 
         "theta_1" : linreg.theta_1, 
