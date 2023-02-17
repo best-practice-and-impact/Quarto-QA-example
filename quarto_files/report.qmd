@@ -40,6 +40,24 @@ Below is the pipeline configuration used in generating this report. The converge
 
 ```{python}
 
+import sys, os
+
+# This cell fixes a problem with imports caused by Quarto using a
+# separate kernel to the one used by our main script
+# We are finding and adding the absolute path of plotting.py to the path so that
+# the python interpreter will be able to identify and import it when needed.
+
+def find(name, path):
+    for root, dirs, files in os.walk(path):
+        if name in files:
+            return root
+
+source_path = find("plotting.py", "d:/repos/quarto_QA_example")
+sys.path.append(source_path)
+```
+
+```{python}
+
 from IPython.display import display, Markdown
 from tabulate import tabulate
 import pandas as pd

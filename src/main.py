@@ -1,36 +1,18 @@
-import datetime
-
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
+from datetime import datetime
 import yaml
-from linear_regression import LinRegression
+
 from quarto import render
 from sklearn.datasets import make_regression
 
-with open('../config.yaml') as f:
+from src.linear_regression import LinRegression
+
+with open('config.yaml') as f:
     config = yaml.load(f, Loader = yaml.FullLoader)
 
-out_filename = str(datetime.today().date()) + "regression_QA"
-
-df = pd.read_csv(config["file_path"])
-sns.pairplot(df)
-plt.show()
+out_filename = str(datetime.today().date()) + "_regression_QA.html"
 
 x_data, y_data = make_regression(n_samples = 100, n_features = 1, noise = 0.4, bias = 50)
 x_data = x_data.flatten()
-
-# Create a heatmap showing correlation of different variables/columns in the dataset
-# correlation = df.corr()
-# sns.heatmap(correlation, cmap = "Wistia", annot = True)
-# plt.show()
-
-# humidity_data = pd.DataFrame(data = df["Humidity"])
-# temperature_data = pd.DataFrame(data = df["Temperature (C)"])
-
-# x_data = temperature_data.to_numpy().flatten()
-# y_data = humidity_data.to_numpy().flatten()
-
 
 learning_rate = config["learning_rate"]
 convergence_threshold = config["convergence_threshold"]
@@ -52,7 +34,7 @@ y_predicted = linreg.calculate_predicted_values(x_data)
 # NumPy dtypes (arrays, numpy floats) are converted back to native types as numpy
 # doesn't play well with yaml.dump() (used in quarto.render's logic)
 render(
-    input = "report.qmd", 
+    input = "quarto_files/report.qmd", 
     output_format = "html",
     output_file = out_filename, 
     execute_params = {

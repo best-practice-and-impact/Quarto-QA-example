@@ -3,4 +3,4 @@ learning_rate: 0.001
 convergence_threshold: 0.000001
 theta_0: 0
 theta_1: 0
-file_path: ../data/possum.csv
+file_path: data/possum.csv
