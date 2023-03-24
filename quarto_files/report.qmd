@@ -32,7 +32,7 @@ r_squared = None
 
 ## Introduction
 
-This QA report is for a univariate linear regression pipeline run on the [____ dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle, and seeks to model the relationship between ____ and ____. The report was created using Quarto, RStudio's multi-language version of R Markdown.
+This QA report is for a univariate linear regression pipeline, being tested on a generic scikit-learn linear dataset. The report was created using Quarto, RStudio's multi-language version of R Markdown.
 
 ## Pipeline Configuration
 
@@ -40,29 +40,17 @@ Below is the pipeline configuration used in generating this report. The converge
 
 ```{python}
 
-import sys, os
-
-# This cell fixes a problem with imports caused by Quarto using a
-# separate kernel to the one used by our main script
-# We are finding and adding the absolute path of plotting.py to the path so that
-# the python interpreter will be able to identify and import it when needed.
-
-def find(name, path):
-    for root, dirs, files in os.walk(path):
-        if name in files:
-            return root
-
-source_path = find("plotting.py", "d:/repos/quarto_QA_example")
-sys.path.append(source_path)
-```
-
-```{python}
-
 from IPython.display import display, Markdown
 from tabulate import tabulate
 import pandas as pd
 import numpy as np
-from plotting import residuals_plot, qq_plot, scatter_plot
+import os
+
+# Quarto's Jupyter kernel uses the directory of the qmd as the working directory so we must move up one directory level in order
+# to be able to properly import our plotting functions
+os.chdir("..")
+
+from src.plotting import residuals_plot, qq_plot, scatter_plot
 
 # Tabulating the config data
 # tabulate() doesn't accept dictionaries as arguments so we are converting

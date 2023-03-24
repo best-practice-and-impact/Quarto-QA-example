@@ -23,7 +23,7 @@ using `pip install -r requirements.txt`
 
 ## Usage
 
-After cloning the repo and downloading all the dependencies, the pipeline should run unmodified by executing the main script, which should be done by navigating to the main project directory in your terminal and then entering `python -m src.main.py`. This means `main.py` will be treated as a package not a script. NOTE: The project uses relative imports, and will therefore break if not run using this command. A detailed explanation of this can be found in the top answer to [this StackOverflow question](https://stackoverflow.com/questions/14132789/relative-imports-for-the-billionth-time).
+After cloning the repo and downloading all the dependencies, the pipeline should run unmodified by executing the main script, which should be done by navigating to the main project directory in your terminal and then entering `python -m main.py`.
 
  If desired, you may alter parameters from within the config file, where you have control over the model's initial values for the intercept and gradient, labelled $\theta_0$ and $\theta_1$ according to $y=\theta_0 + \theta_1 x$. The convergence threshold determines when the model will stop training. At every iteration of the training loop the value of the loss function is subtracted from its previous value, and training stops when this difference reaches the convergence threshold.
 
